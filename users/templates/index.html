@@ -1,12 +1,19 @@
-{% extends 'users/layout.html' %}
+{% extends 'layout.html' %}
 {% block body %}
 
-<h1>Welcome, {{ request.user.first_name }}</h1>
+<h1>Welcome, {{ student.user.first_name }}</h1>
 <ul>
-    <li>Username: {{ request.user.username }}</li>
-    <li>Email: {{ request.user.email }}</li>
+    <li>Username: {{ student.user.username }}</li>
+    <li>Email: {{ student.user.email }}</li>
+    <li>Student ID: {{student.s_id}}</li>
 </ul>
 
-<a href="{% url 'logout' %}">Log Out</a>
+{% for subject in subjects %}
+<div>{{ subject }}&nbsp;<a href="{% url 'users:remove' subject.subject_id %}">Drop</a></div>
+{% endfor %}
+
+<a href="{% url 'regist:sublist' %}">Subject List</a>
+
+<a href="{% url 'users:logout' %}">Log Out</a>
 
 {% endblock %}

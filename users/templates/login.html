@@ -1,15 +1,27 @@
-{% extends 'users/layout.html' %}
-{% block body %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>login</title>
+</head>
+<body>
+    <h1>Welcome to Registration</h1>
+    <h1>please sign in</h1>
+    {% extends 'layout.html' %}
+    {% block body %}
 
-{% if message %}
-    <div>{{ message }}</div>
-{% endif %}
+    {% if message %}
+        <div>{{ message }}</div>
+    {% endif %}
 
-<form action="{% url 'login' %}" method="post">
+    <form action="{% url 'users:login' %}" method="post">
     {% csrf_token %}
     <input type="text" name="username" placeholder="Username">
     <input type="password" name="password" placeholder="Password">
     <input type="submit" value="Login">
-</form>
+    </form>
 
 {% endblock %}
+</body>
+</html>

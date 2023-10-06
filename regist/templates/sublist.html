@@ -1,0 +1,36 @@
+{% extends 'layout.html' %}
+{% block body %}
+
+<h1><center>Registrar, {{ student.user.first_name }}</center></h1>
+<hr>
+<p>Username: {{ student.user.username }}<br>
+    Student ID: {{student.s_id}}<br>
+    Email: {{ student.user.email }}<br>
+</p>
+<hr><br>
+
+<table style="border: 1px solid blueviolet; width: 100%; ">
+    <tr>
+        <th>Subject</th>
+        <th>Enrollment</th>
+    </tr>
+    <tr>
+    {% for subject in subjects %}
+        <td style="border: 1px solid blueviolet;"><div>{{ subject }}</td>
+        <td style="border: 1px solid blueviolet;"><center><a href="{% url 'regist:enroll' subject.sub_id %}">Enroll</a></center></div></td>
+    </tr>
+    {% if subject.status == True %}
+
+    {% endif %}
+    {% if subject.status == False %}
+    <p>Not available</p><br>
+    {% endif %}
+    {% endfor %}
+</table>
+<br>
+
+<a href="{% url 'regist:sublist' %}">Subject List</a>
+
+<a href="{% url 'users:index' %}">Home</a>
+
+{% endblock %}
