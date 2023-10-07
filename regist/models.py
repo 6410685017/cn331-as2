@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 
 class Student(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
-    s_id = models.IntegerField()
+    s_id = models.PositiveIntegerField()
     
 
     def __str__(self):
@@ -14,10 +14,10 @@ class Student(models.Model):
 class Subject(models.Model):
     sub_id = models.CharField(max_length=5, primary_key='True')
     sub_name = models.CharField(max_length=64)
-    capacity  = models.IntegerField()
+    capacity  = models.PositiveIntegerField()
     status = models.BooleanField()
-    # semester = models.IntegerField()
-    # year = models.IntegerField()
+    semester = models.PositiveIntegerField()
+    year = models.PositiveIntegerField()
 
     def __str__(self):
         return f'{self.sub_id}: {self.sub_name}'

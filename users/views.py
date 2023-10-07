@@ -36,7 +36,6 @@ def login_view(request):
 
     return render(request, 'login.html')
 
-
 def logout_view(request):
     logout(request)
     return render(request, 'login.html', {
@@ -47,4 +46,11 @@ def remove(request, sub_id):
     student = Student.objects.get(user_id=request.user)
     sublist = SubjectStudentList.objects.get(subject_id=sub_id)
     sublist.students.remove(student)
+    
+    subj = Subject.objects.get(sub_id=sub_id)
+    subj.capacity += 1
+    if subj.capacity < 0:
+        return render(request, 'sublist.html')
+    subj.save()
+
     return HttpResponseRedirect(reverse('users:index'))

@@ -9,28 +9,31 @@
 </p>
 <hr><br>
 
-<table style="border: 1px solid blueviolet; width: 100%; ">
+<table id="table">
     <tr>
+        <th></th>
         <th>Subject</th>
-        <th>Enrollment</th>
-    </tr>
-    <tr>
-    {% for subject in subjects %}
-        <td style="border: 1px solid blueviolet;"><div>{{ subject }}</td>
-        <td style="border: 1px solid blueviolet;"><center><a href="{% url 'regist:enroll' subject.sub_id %}">Enroll</a></center></div></td>
-    </tr>
-    {% if subject.status == True %}
+        <th>Capacity</th>
+        <th>Status</th>
 
-    {% endif %}
-    {% if subject.status == False %}
-    <p>Not available</p><br>
-    {% endif %}
+    </tr>
+    {% for subject in subjects %}
+    <tr>
+        <td>{{ subject.semester }}/{{ subject.year }}</td>
+        <td style="border: 1px solid blueviolet; border-collapse: collapse;"><div>{{ subject }}</td>
+        <td>{{ subject.capacity }}</td>    
+        {% if subject.capacity == 0 %}
+            <td>Not available</td>    
+        {% else %}
+            <td style="border: 1px solid blueviolet; border-collapse: collapse;"><center><a href="{% url 'regist:enroll' subject.sub_id %}">Enroll</a></center></div></td>
+        {% endif %}
+    </tr>  
     {% endfor %}
 </table>
 <br>
 
-<a href="{% url 'regist:sublist' %}">Subject List</a>
+<!-- <a href="{% url 'regist:sublist' %}">Subject List</a> -->
 
-<a href="{% url 'users:index' %}">Home</a>
+<a style="text-align: right;" href="{% url 'users:index' %}">Back to home</a>
 
 {% endblock %}

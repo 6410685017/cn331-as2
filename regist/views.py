@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from regist.models import Student, Subject, SubjectStudentList
+from users.views import remove
 
 # Create your views here.
 
@@ -18,4 +19,11 @@ def enroll(request, sub_id):
     student = Student.objects.get(user_id=request.user)
     sublist = SubjectStudentList.objects.get(subject_id=sub_id)
     sublist.students.add(student)
+
+    subj = Subject.objects.get(sub_id=sub_id)
+    subj.capacity -= 1
+    if subj.capacity < 0:
+        return render(request, 'sublist.html')
+    subj.save()
+    
     return HttpResponseRedirect(reverse('users:index'))
