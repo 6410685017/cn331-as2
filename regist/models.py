@@ -7,7 +7,6 @@ class Student(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     s_id = models.PositiveIntegerField()
     
-
     def __str__(self):
         return f'ID: {self.s_id} ,Username {self.user.username}'
     
@@ -20,9 +19,12 @@ class Subject(models.Model):
     year = models.PositiveIntegerField()
 
     def __str__(self):
-        return f'{self.sub_id}: {self.sub_name}'
+        return f'{self.sub_id} {self.sub_name}'
 
 class SubjectStudentList(models.Model):
     subject = models.OneToOneField(Subject, on_delete=models.CASCADE, primary_key=True)
     students = models.ManyToManyField(Student, blank=True)
+    
+    def __str__(self):
+        return f'{self.subject.sub_id} {self.subject.sub_name}'
 

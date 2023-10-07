@@ -1,19 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>student home page</title>
+        <style>
+            * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Poppins",sans-serif ;} 
+            table {
+                width: 100%;
+            }
+            th {
+                height: 30px;
+                border: transparent;
+                border-collapse: collapse;
+                border-radius: 10px;
+            }
+            td {
+                height: 50px;
+                border: transparent;
+                border-collapse: collapse;
+                margin: 20px;
+            }
+        
+            body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        background: url(https://scontent.fbkk6-2.fna.fbcdn.net/v/t1.6435-9/126860888_2784600101810645_7728869971705722271_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=730e14&_nc_ohc=F1JS2Pyo30IAX_DuXiK&_nc_ht=scontent.fbkk6-2.fna&oh=00_AfA8O0bm18VHAM7SpP7JCSue8XB9PgRvVfUwUgft4shsXg&oe=6548F7CD);
+        background-size: cover;
+        background-position: center;
+        padding: 50px;
+    }
+    
+    .wrapper {
+        width: 700px;
+        background: whitesmoke;
+        border: 2px solid rgba(255, 255, 255, .2);
+        backdrop-filter: blur(60px);
+        box-shadow:0 0 10px rgba(0, 0, 0, .2) ;
+        color:black;
+        border-radius: 10px;
+        padding: 30px 40px;
+        opacity: 95%;
+    }
+        </style>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    </head>
+<body>
 {% extends 'layout.html' %}
 {% block body %}
-
-<h1>Welcome, {{ student.user.first_name }}</h1>
-<ul>
-    <li>Username: {{ student.user.username }}</li>
-    <li>Email: {{ student.user.email }}</li>
-    <li>Student ID: {{student.s_id}}</li>
-</ul>
-
-{% for subject in subjects %}
-<div>{{ subject }}&nbsp;<a href="{% url 'users:remove' subject.subject_id %}">Drop</a></div>
-{% endfor %}
-
-<a href="{% url 'regist:sublist' %}">Quota</a>
-
-<a href="{% url 'users:logout' %}">Log Out</a>
-
-{% endblock %}
+<div class="wrapper">
+    <h1 style="background: whitesmoke; margin: 0px; padding: 40px; border-radius: 10px; opacity: 100%;">
+        <center>Welcome, {{ student.user.first_name }} !</center></h1>
+    <br>
+    <p style="padding: 20px; background: rgb(199, 226, 186); border-radius: 10px;">
+        Username: {{ student.user.username }}<br>
+        Student ID: {{student.s_id}}<br>
+        Email: {{ student.user.email }}<br>
+    </p>
+    <br>
+    <table>
+        <tr style="background: rgb(238, 228, 111);">
+            <th><center>Quota Requested</center></th>
+            <th><center>Status</center></th>
+        </tr>
+        {% for subject in subjects %}
+        <tr style="background: white; ">
+            <td style="text-indent: 20px;";>&nbsp;{{ subject }}</td>
+            <td><center><a href="{% url 'users:remove' subject.subject_id %}" class="btn btn-default btn-sm" 
+                style="background-color: rgb(251, 112, 147); border-color: rgb(251, 112, 147) ; color: white; border-radius: 30px;" >
+                <span class="glyphicon glyphicon-remove"></span>&nbsp;Drop</a></center></td>
+            {% endfor %}
+        </tr>
+        </table>
+        <br>
+        <div style="float: bottom;"><center>
+            <a href="{% url 'regist:sublist' %}" class="btn btn-info btn-lg" style="background-color: rgb(112, 198, 251); border-color: rgb(112, 198, 251) ; color: white; size: 10%;">
+                <span class="glyphicon glyphicon-edit"></span>&nbsp;Request Quota</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <a href="{% url 'users:logout' %}" class="btn btn-info btn-lg" style="background-color: rgb(246, 100, 60); border-color: rgb(246, 100, 60) ; color: white;">
+                <span class="glyphicon glyphicon-log-out"></span>&nbsp;Log out</a>
+        
+        </center></div>
+    {% endblock %}
+</div>
+</body>
+</html>

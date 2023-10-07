@@ -1,39 +1,99 @@
-{% extends 'layout.html' %}
-{% block body %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>student home page</title>
+    <style>
+        * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins",sans-serif ;} 
+    table {
+        width: 100%;
+    }
+    th {
+        height: 30px;
+        border: transparent;
+        border-collapse: collapse;
+        border-radius: 10px;
+    }
+    td {
+        height: 50px;
+        border: transparent;
+        border-collapse: collapse;
+        margin: 20px;
+    }    
+    body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        background: url(https://scontent.fbkk6-2.fna.fbcdn.net/v/t1.6435-9/126241817_2784599285144060_6235241575451976301_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=730e14&_nc_ohc=a1JnMY5ndv0AX_8v_y8&_nc_ht=scontent.fbkk6-2.fna&oh=00_AfAeCyU9zqt1GsqGxPAbKRsN7z6QxoQW5Ln9T2Buyc-V1w&oe=6548F25B);
+        background-size: cover;
+        background-position: center;
+        padding: 50px;
+    }
+    
+    .wrapper {
+        width: 700px;
+        background: rgba(231, 245, 231, 0.945);
+        border: 2px solid rgba(255, 255, 255, .2);
+        backdrop-filter: blur(60px);
+        box-shadow:0 0 10px rgba(0, 0, 0, .2) ;
+        color:black;
+        border-radius: 10px;
+        padding: 30px 40px;
+    }
+    </style>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="wrapper">
+    {% extends 'layout.html' %}
+    {% block body %}
 
-<h1><center>Registrar, {{ student.user.first_name }}</center></h1>
-<hr>
-<p>Username: {{ student.user.username }}<br>
-    Student ID: {{student.s_id}}<br>
-    Email: {{ student.user.email }}<br>
-</p>
-<hr><br>
+    <h1 style="margin: 0px; padding: 40px; opacity: 85%;"><center>Registrar, {{ student.user.first_name }}</center></h1>
+    <h4><center>request quota home page</center></h4>
+    
+    <br>
+    <p style="padding: 20px; background: rgb(199, 226, 186); border-radius: 10px;">
+        Username: {{ student.user.username }}<br>
+        Student ID: {{student.s_id}}<br>
+        Email: {{ student.user.email }}<br>
+    </p>
+    <br>
 
-<table id="table">
-    <tr>
-        <th></th>
-        <th>Subject</th>
-        <th>Capacity</th>
-        <th>Status</th>
-
-    </tr>
-    {% for subject in subjects %}
-    <tr>
-        <td>{{ subject.semester }}/{{ subject.year }}</td>
-        <td style="border: 1px solid blueviolet; border-collapse: collapse;"><div>{{ subject }}</td>
-        <td>{{ subject.capacity }}</td>    
-        {% if subject.capacity == 0 %}
-            <td>Not available</td>    
-        {% else %}
-            <td style="border: 1px solid blueviolet; border-collapse: collapse;"><center><a href="{% url 'regist:enroll' subject.sub_id %}">Enroll</a></center></div></td>
-        {% endif %}
-    </tr>  
-    {% endfor %}
-</table>
-<br>
-
-<!-- <a href="{% url 'regist:sublist' %}">Subject List</a> -->
-
-<a style="text-align: right;" href="{% url 'users:index' %}">Back to home</a>
-
-{% endblock %}
+    <table>
+        <tr style="background: rgb(238, 228, 111);">
+            <th><center>Semester</center></th>
+            <th><center>Subject</center></th>
+            <th><center>Available</center></th>
+            <th><center>Status</center></th>
+        </tr>
+        {% for subject in subjects %}
+        <tr style="background:none;">
+            <td><center>{{ subject.semester }}/{{ subject.year }}</center></td>
+            <td style="text-indent: 20px;"><div>&nbsp;{{ subject }}</td>
+            <td><center>{{ subject.capacity }}</center></td>    
+            {% if subject.capacity == 0 %}
+                <td><center>Not available</center></td>    
+            {% else %}
+                <td><center><a href="{% url 'regist:enroll' subject.sub_id %}" class="btn btn-default btn-sm" style="background-color: rgb(76, 218, 104); border-color: rgb(76, 218, 104); color: white;">
+                    Enroll</a>&nbsp;</center></div></td>
+            {% endif %}
+        </tr>  
+        {% endfor %}
+    </table>
+    <br>
+    <div style="float: bottom;"><center>
+        <a href="{% url 'users:index' %}" class="btn btn-info btn-lg" style="background-color: rgb(214, 136, 219); border-color: rgb(112, 198, 251) ; color: white; size: 10%;">
+        <span class="glyphicon glyphicon-home"></span>&nbsp;Back to home</a>
+    </center></div>
+    {% endblock %}
+</div>
+</body>
+</html>

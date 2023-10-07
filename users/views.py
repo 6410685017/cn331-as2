@@ -52,5 +52,5 @@ def remove(request, sub_id):
     if subj.capacity < 0:
         return render(request, 'sublist.html')
     subj.save()
-
+    
     return HttpResponseRedirect(reverse('users:index'))

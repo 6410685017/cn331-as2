@@ -2,26 +2,123 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>login</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <title>login Quota</title>
+    <link rel = "stylesheet" href="style.css">
+
+    <style>
+     * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins",sans-serif ;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: url(https://med.engr.tu.ac.th/images/webpage/230420144225_02021.7.12_210712_9_.jpg);
+    background-size: cover;
+    background-position: center;
+}
+
+.wrapper {
+    width: 420px;
+    background: rgba(226, 252, 253, 0.945);
+    border: 2px solid rgba(255, 255, 255, .2);
+    backdrop-filter: blur(60px);
+    box-shadow:0 0 10px rgba(0, 0, 0, .2) ;
+    color:black;
+    border-radius: 10px;
+    padding: 30px 40px;
+}
+
+.wrapper h1 {
+    font-size: 20px;
+    text-align: center;
+}
+
+.wrapper .input-box {
+    position: relative;
+    width: 100%;
+    height: 50px;
+    margin: 30px 0;
+}
+
+.input-box input{
+    width: 100%;
+    height: 100%;
+    background: rgb(175, 223, 238);
+    border: none;
+    outline: none;
+    border: 2px solid rgba(255, 255, 255, .2);
+    border-radius: 40px;
+    font-size: 16px;
+    color: black;
+    padding: 20px 45px 20px 20px;
+}
+
+.input-box input::placeholder{
+    color: black;
+}
+.input-box i{
+    position: absolute;
+    right: 20px;
+    top: 25px;
+    transform: translateY(-50%);
+    font-size: 20px;
+}
+
+.wrapper .btn {
+    width: 100%;
+    height: 30px;
+    background: #fff;
+    border: none;
+    outline: none;
+    border-radius: 40px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+    cursor: pointer;
+    font-size: 16px;
+    color: #333;
+    font-weight: 600;
+    margin: 20px 0 15px;
+}
+    
+    </style>
+    
 </head>
 <body>
-    <h1>Welcome to Registration</h1>
-    <h1>please sign in</h1>
-    {% extends 'layout.html' %}
-    {% block body %}
+  <div class="wrapper">
+     <h1>Welcome to Registration</h1>
+     <h1>please sign in </h1>
+     {% extends 'layout.html' %}
+     {% block body %}
 
-    {% if message %}
+     {% if message %}
         <div>{{ message }}</div>
-    {% endif %}
+     {% endif %}
 
-    <form action="{% url 'users:login' %}" method="post">
-    {% csrf_token %}
-    <input type="text" name="username" placeholder="Username">
-    <input type="password" name="password" placeholder="Password">
-    <input type="submit" value="Login">
-    </form>
+     <form action="{% url 'users:login' %}" method="post">
+     {% csrf_token %}
+      <div class="input-box">
+        <input type="text" name="username" placeholder="Username" required>
+        <i class='bx bx-user'></i>
+      </div>
 
-{% endblock %}
+      <div class="input-box">
+        <input type="password" name="password" placeholder="Password" required>
+        <i class='bx bxs-lock-alt'></i>
+      </div>
+
+     <input type="submit" class="btn" value="Login">
+     </form>
+
+     {% endblock %}
+   </div>
 </body>
+
 </html>
