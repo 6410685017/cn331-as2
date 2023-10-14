@@ -1,4 +1,8 @@
-# cn331-as2
+# cn331-as3
+## link web app : 
+https://cn331v2.pythonanywhere.com/admin
+https://cn331v2.pythonanywhere.com/login
+
 ## Condition:
 develop Web Application by Django Framework for request quota of sunject
 1. regist by admin and normal user
