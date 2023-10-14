@@ -20,8 +20,10 @@ develop Web Application by Django Framework for request quota of sunject
 ## Video clip [here](https://youtu.be/P7EoIaK6JhA)
 
 ## link web app : 
-- https://cn331v2.pythonanywhere.com/admin
-- https://cn331v2.pythonanywhere.com/login
+- Admin: https://cn331v2.pythonanywhere.com/admin
+- Users: https://cn331v2.pythonanywhere.com/login
+
+## Summary PDF file [here](https://tuipied-my.sharepoint.com/:b:/g/personal/pitchakan_lee_dome_tu_ac_th/ESb5WdGQewtKr2WcMPmSQpcBs9hXw4fNsBy-HxOVGFVxlA?e=VvuOxO)
 
 ## Contact
 - Pitchakan Leephud - 6410615113 - pitchakan.lee@dome.tu.ac.th
