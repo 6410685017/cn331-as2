@@ -74,7 +74,7 @@ class TestViews(TestCase):
 class TestModel(TestCase):
     def setUp(self):
         self.student = Student.objects.create(
-            user = 'testuser',
+            username = 'testuser',
             s_id = '0001',
         )
 
@@ -93,11 +93,11 @@ class TestModel(TestCase):
         )
     
     def test_student_str(self):
-        self.assertEquals(self.student.__str__(), self.student.user)
+        self.assertEquals(self.student.__str__(), self.student.username)
 
     def test_subject_str(self):
         self.assertEquals(self.subject.__str__(), self.subject.sub_id + ' ' + self.subject.sub_name)
 
     def test_subjectstudent_str(self):
-        self.assertEquals(self.subjectstudentList.__str__(), self.student.user + ' ' + self.subject.sub_id + ' ' + self.subject.sub_name)
+        self.assertEquals(self.subjectstudentList.__str__(), self.student.username + ' ' + self.subject.sub_id + ' ' + self.subject.sub_name)
     
