@@ -1,4 +1,7 @@
 # cn331-as4
+
+## Detail test file.pdf  [here](https://drive.google.com/file/d/1n_ksZipit9awiTWd9lx4VyhKo4sEaxyZ/view?usp=share_link)
+
 ## Condition:
 develop Web Application by Django Framework for request quota of sunject
 1. regist by admin and normal user
