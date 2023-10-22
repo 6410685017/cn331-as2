@@ -1,4 +1,7 @@
-# cn331-as3
+# cn331-as4
+
+## Detail test file.pdf  [here](https://drive.google.com/file/d/1n_ksZipit9awiTWd9lx4VyhKo4sEaxyZ/view?usp=share_link)
+
 ## Condition:
 develop Web Application by Django Framework for request quota of sunject
 1. regist by admin and normal user
@@ -17,7 +20,7 @@ develop Web Application by Django Framework for request quota of sunject
 6. Admin สามารถเข้าไปดูได้ว่า ในแต่ละวิชามีstudent คนไหนลงทะเบียนไปแล้วบ้าง
    
 ![image](https://github.com/6410615113/cn331-as2/assets/88651584/3b8193e7-be5e-48b7-83c2-7384160810b4)
-## Video clip [here](https://youtu.be/P7EoIaK6JhA)
-## Contact
+
+## Members
 - Pitchakan Leephud - 6410615113 - pitchakan.lee@dome.tu.ac.th
 - Nalinporn Promphen - 6410685017 - nalinporn.pro@dome.tu.ac.th
