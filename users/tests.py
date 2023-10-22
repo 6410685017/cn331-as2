@@ -1,84 +1,61 @@
-from django.test import TestCase, Client
+from django.test import TestCase, SimpleTestCase
 from django.contrib.auth.models import User
-from django.test import SimpleTestCase
 from django.urls import reverse, resolve
-from .views import index, login_view, logout_view, remove
-from regist.models import Student, Subject
-# from regist.views import enroll
+from django.contrib.auth import authenticate
+from .views import index, login_view, logout_view
+from regist.models import Student
+
 
 # Create your tests here.
 class TestUrl(SimpleTestCase):
-    def test_index(self):
+    def test_index_is_resolved(self):
         url = reverse('users:index')
         self.assertEqual(resolve(url).func, index)
 
-    def test_login(self):
+    def test_login_is_resolved(self):
         url = reverse('users:login')
         self.assertEqual(resolve(url).func, login_view)
 
-    def test_logout(self):
+    def test_logout_is_resolved(self):
         url = reverse('users:logout')
         self.assertEqual(resolve(url).func, logout_view)
-    
-    # def test_remove(self):
-    #     url = reverse('users:index')
-    #     self.assertEqual(resolve(url).func, remove, login_view) 
-    
 
 class TestViews(TestCase):
-    def test_not_login(self):
-        c = Client()
-        response = c.get(reverse('users:login'))
+    def setUp(self):
+        self.user1 = User.objects.create_user(username='testuser', password='passcn331')
+        self.student1 = Student.objects.create(user=self.user1, s_id=0)
+    
+    def test_status_login(self):
+        response = self.client.get(reverse('users:login'))
         self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'login.html')
 
-    def test_login_success(self):
-        c = Client()
-        url = reverse('users:login')
-        response = c.post(url, {
-            'username': '0000',
-            'password': 'passcn331'
-        })
+    def test_login_is_success(self):
+        response = self.client.post(reverse('users:login'), {
+            'username': 'testuser',
+            'password': 'passcn331'})
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, reverse('users:index'))
 
+    def test_login_is_unsuccess(self):
+        response = self.client.post(reverse('users:login'), {
+            'username': 'testuser',
+            'password': 'wrongpass'})
         self.assertEqual(response.status_code, 200)
-
-    def test_login_unsuccess(self):
-        url = reverse('users:login')
-        response = self.client.post(url, {
-            'username': '0000',
-            'password': 'wrongpass'
-        })
-
-        self.assertEqual(response.status_code, 200)
-   
+        self.assertTrue('message' in response.context)
+        self.assertEqual(response.context['message'], 'Invalid credentials.')
+    
+    def test_index_view_authenticated_user(self):
+        response = self.client.post(reverse('users:login'), {
+            'username': 'testuser',
+            'password': 'passcn331'})
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, reverse('users:index'))
+        user = authenticate(username='testuser', password='passcn331')
+        self.assertTrue(user.is_authenticated)
+    
     def test_logout_is_success(self):
-        url = reverse("users:logout")
+        url = reverse('users:logout')
         response = self.client.get(url)
-
         self.assertEqual(response.status_code, 200)
     
-    # def test_removesubject(self):
-    #     response = self.client.post(self.removesubject_url)
-
-    #     self.assertEqual(response.status_code, 200)
-    #     self.assertTemplateUsed(response, 'regist/sublist.html')
-
-    # def test_removesubject_did_not_regist(self):
-    #     subject = Subject.objects.create(
-    #         sub_id='CN331',
-    #         sub_name='Software Engineering',
-    #         semester=1,
-    #         year=2023,
-    #         capacity=2,
-    #         status=True
-    #     )
-    #     url = reverse('users:index', args=[subject.sub_id])
-    #     response = self.client.post(url)
-
-    #     self.assertEqual(response.status_code, 400)
-    #     self.assertTemplateUsed(response, 'users/index.html')
-
-    # def test_removesubject_get(self):
-    #     response = self.client.get(self.remove_url)
-
-    #     self.assertEqual(response.status_code, 400)
-    #     self.assertTemplateUsed(response, 'regist/sublist.html')
